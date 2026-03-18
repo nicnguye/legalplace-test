@@ -31,6 +31,26 @@ export class Pharmacy {
     return drug;
   }
 
+  handleFervex(drug) {
+    this.incrementBenefit(drug);
+
+    if (drug.expiresIn <= 10) {
+      this.incrementBenefit(drug);
+    }
+
+    if (drug.expiresIn <= 5) {
+      this.incrementBenefit(drug);
+    }
+
+    drug.expiresIn -= 1;
+
+    if (drug.expiresIn < 0) {
+      drug.benefit = MIN_BENEFIT; // Benefit drops to 0 after the expiration date
+    }
+
+    return drug;
+  }
+
   updateBenefitValue() {
     this.drugs.forEach((drug) => {
       switch (drug.name) {
@@ -40,6 +60,7 @@ export class Pharmacy {
           this.handleHerbalTea(drug);
           break;
         case "Fervex":
+          this.handleFervex(drug);
           break;
         case "Dafalgan":
           break;
