@@ -1,3 +1,5 @@
+import { MAGIC_PILL, HERBAL_TEA, FERVEX, DAFALGAN } from "./drugConstant.js";
+
 const MAX_BENEFIT = 50;
 const MIN_BENEFIT = 0;
 
@@ -69,15 +71,15 @@ export class DafalganStrategy {
 }
 
 export class DrugStrategy {
-  getStrategy(drug) {
-    switch (drug.name) {
-      case "Magic Pill":
+  getStrategy(drugName) {
+    switch (drugName) {
+      case MAGIC_PILL:
         return new MagicPillStrategy();
-      case "Herbal Tea":
+      case HERBAL_TEA:
         return new HerbalTeaStrategy();
-      case "Fervex":
+      case FERVEX:
         return new FervexStrategy();
-      case "Dafalgan":
+      case DAFALGAN:
         return new DafalganStrategy();
       default:
         return new NormalDrugStrategy();

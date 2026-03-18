@@ -1,4 +1,4 @@
-import { DrugStrategy } from "./drugStrategy.js";
+import { DrugStrategy } from "../drug/drugStrategy.js";
 
 export class Drug {
   constructor(name, expiresIn, benefit) {
@@ -15,7 +15,7 @@ export class Pharmacy {
 
   updateBenefitValue() {
     this.drugs.forEach((drug) => {
-      const strategy = new DrugStrategy().getStrategy(drug);
+      const strategy = new DrugStrategy().getStrategy(drug.name);
       strategy.updateBenefit(drug);
     });
 
