@@ -18,7 +18,7 @@ for (let elapsedDays = 0; elapsedDays < 30; elapsedDays++) {
 
 /* eslint-disable no-console */
 fs.writeFile(
-  "output.json",
+  "output2.json",
   JSON.stringify({ result: log }, null, 2).concat("\n"),
   (err) => {
     if (err) {
