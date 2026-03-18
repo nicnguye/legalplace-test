@@ -20,6 +20,13 @@ export class Pharmacy {
     return drug;
   }
 
+  decrementBenefit(drug) {
+    if (drug.benefit > MIN_BENEFIT) {
+      drug.benefit -= 1;
+    }
+    return drug;
+  }
+
   handleHerbalTea(drug) {
     this.incrementBenefit(drug);
 
@@ -51,6 +58,18 @@ export class Pharmacy {
     return drug;
   }
 
+  handleNormalDrug(drug) {
+    this.decrementBenefit(drug);
+
+    drug.expiresIn -= 1;
+
+    if (drug.expiresIn < 0) {
+      this.decrementBenefit(drug); // Benefit degrades twice as fast after expiration date
+    }
+
+    return drug;
+  }
+
   updateBenefitValue() {
     this.drugs.forEach((drug) => {
       switch (drug.name) {
@@ -65,6 +84,7 @@ export class Pharmacy {
         case "Dafalgan":
           break;
         default:
+          this.handleNormalDrug(drug);
           break;
       }
     });
