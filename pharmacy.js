@@ -1,3 +1,5 @@
+const MAX_BENEFIT = 50;
+const MIN_BENEFIT = 0;
 export class Drug {
   constructor(name, expiresIn, benefit) {
     this.name = name;
@@ -11,10 +13,37 @@ export class Pharmacy {
     this.drugs = drugs;
   }
 
+  incrementBenefit(drug) {
+    if (drug.benefit < MAX_BENEFIT) {
+      drug.benefit += 1;
+    }
+    return drug;
+  }
+
+  handleHerbalTea(drug) {
+    this.incrementBenefit(drug);
+
+    drug.expiresIn -= 1;
+    if (drug.expiresIn < 0) {
+      this.incrementBenefit(drug);
+    }
+
+    return drug;
+  }
+
   updateBenefitValue() {
     this.drugs.forEach((drug) => {
       switch (drug.name) {
         case "Magic Pill":
+          break;
+        case "Herbal Tea":
+          this.handleHerbalTea(drug);
+          break;
+        case "Fervex":
+          break;
+        case "Dafalgan":
+          break;
+        default:
           break;
       }
     });
